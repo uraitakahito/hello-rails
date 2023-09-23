@@ -1,0 +1,26 @@
+{
+	"dockerComposeFile": ["./docker-compose.yml"],
+	"service": "hello-rails-app",
+  	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	"customizations": {
+	  "vscode": {
+		"extensions": [
+			"ms-vscode-remote.remote-containers",
+			"eamodio.gitlens",
+			"ms-azuretools.vscode-docker"
+		]
+	  }
+	},
+
+	//
+	// Add a non-root user to a container
+	// https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
+	//
+	// Perhaps, already developer is default user because of Dockerfile
+	// "remoteUser": "developer",
+	// the default of updateRemoteUserUID is true
+	// "updateRemoteUserUID": true,
+
+	"forwardPorts": [3000]
+}
