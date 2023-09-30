@@ -1,3 +1,6 @@
+#
+# Be sure to use docker-compose or devcontainer.
+#
 FROM ruby:3.2-bullseye
 
 ARG user_id=501
