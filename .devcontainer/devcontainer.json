@@ -3,15 +3,16 @@
 	"service": "hello-rails-app",
   	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-	"customizations": {
-	  "vscode": {
-		"extensions": [
-			"ms-vscode-remote.remote-containers",
-			"eamodio.gitlens",
-			"ms-azuretools.vscode-docker"
-		]
-	  }
-	},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "eamodio.gitlens",
+        "ms-azuretools.vscode-docker",
+        "KoichiSasada.vscode-rdbg"
+      ]
+    }
+  },
 
 	//
 	// Add a non-root user to a container
