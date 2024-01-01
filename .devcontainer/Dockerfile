@@ -12,10 +12,10 @@ ARG password=password
 # https://docs.docker.com/engine/reference/builder/#/workdir
 ARG home=/home/${user_name}
 
-# Base
-RUN apt-get update && \
-  apt-get upgrade -y && \
-  apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && \
+  apt-get upgrade -y -qq && \
+  apt-get install -y -qq --no-install-recommends \
+    # Basic
     less \
     sudo \
     procps \
@@ -26,27 +26,25 @@ RUN apt-get update && \
     iputils-ping \
     net-tools \
     git \
-    gnupg2
-# Editor
-RUN apt-get install -y --no-install-recommends vim emacs
-# Utility
-RUN apt-get install -y --no-install-recommends \
-  tmux \
-  # fzf needs PAGER(less or something)
-  fzf \
-  exa \
-  trash-cli
+    gnupg2 \
+    # Editor
+    vim emacs \
+    # Utility
+    tmux \
+    # fzf needs PAGER(less or something)
+    fzf \
+    exa \
+    trash-cli \
+    # Development
+    default-mysql-client && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # Add superuser
 RUN curl -sS https://raw.githubusercontent.com/uraitakahito/set-superuser-and-group/main/set-superuser-and-group.sh > /usr/local/bin/set-superuser-and-group.sh && \
   chmod 755 /usr/local/bin/set-superuser-and-group.sh && \
   set-superuser-and-group.sh ${group_id} ${user_id} ${user_name} ${password} && \
   chown -R ${user_id}:${group_id} ${home}
-
-#
-# MySQL client
-#
-RUN apt-get install -y default-mysql-client
 
 USER ${user_name}
 WORKDIR /home/workspaces
