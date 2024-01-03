@@ -47,6 +47,5 @@ RUN curl -sS https://raw.githubusercontent.com/uraitakahito/set-superuser-and-gr
   chown -R ${user_id}:${group_id} ${home}
 
 USER ${user_name}
-WORKDIR /home/workspaces
 
 ENTRYPOINT ["tail", "-F", "/dev/null"]
