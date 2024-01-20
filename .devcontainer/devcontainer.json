@@ -10,7 +10,8 @@
         "ms-vscode-remote.remote-containers",
         "eamodio.gitlens",
         "ms-azuretools.vscode-docker",
-        "KoichiSasada.vscode-rdbg"
+        "KoichiSasada.vscode-rdbg",
+        "Shopify.ruby-lsp"
       ]
     }
   },
