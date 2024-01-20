@@ -1,7 +1,7 @@
 {
-	"dockerComposeFile": ["./docker-compose.yml"],
-	"service": "hello-rails-app",
-  	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "dockerComposeFile": ["./docker-compose.yml"],
+  "service": "hello-rails-app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "postAttachCommand": "bundle install",
 
   "customizations": {
@@ -16,14 +16,14 @@
     }
   },
 
-	//
-	// Add a non-root user to a container
-	// https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
-	//
-	// Perhaps, already developer is default user because of Dockerfile
-	// "remoteUser": "developer",
-	// the default of updateRemoteUserUID is true
-	// "updateRemoteUserUID": true,
+  //
+  // Add a non-root user to a container
+  // https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
+  //
+  // Perhaps, already developer is default user because of Dockerfile
+  // "remoteUser": "developer",
+  // the default of updateRemoteUserUID is true
+  // "updateRemoteUserUID": true,
 
-	"forwardPorts": [3000]
+  "forwardPorts": [3000]
 }
