@@ -68,7 +68,11 @@ GEM
       tzinfo (~> 2.0)
     ast (2.4.2)
     builder (3.2.4)
+    bullet (7.1.6)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
@@ -154,6 +158,10 @@ GEM
     rake (13.0.6)
     rdoc (6.5.0)
       psych (>= 4.0.0)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.19.1)
+      connection_pool
     regexp_parser (2.9.0)
     reline (0.3.8)
       io-console (~> 0.5)
@@ -190,6 +198,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uniform_notifier (1.16.0)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -199,10 +208,12 @@ PLATFORMS
   aarch64-linux
 
 DEPENDENCIES
+  bullet
   debug
   mysql2 (~> 0.5)
   puma (~> 5.0)
   rails (~> 7.0.8)
+  redis
   rubocop-rails
   sprockets-rails
   tzinfo-data

@@ -12,8 +12,10 @@ services:
       - zsh-volume:/zsh-volume
     environment:
       - LANG=ja_JP.UTF-8
+      - REDIS_URL=redis://hello-rails-redis:6379/0
     networks:
       - db-network
+      - redis-network
 
   hello-rails-db:
     # mysql/mysql-server:5.7
@@ -33,10 +35,19 @@ services:
     networks:
       - db-network
 
+  hello-rails-redis:
+    image: redis:7.2.4
+    ports:
+      - '6379:6379'
+    networks:
+      - redis-network
+
 volumes:
   zsh-volume:
     name: zsh-volume
 
 networks:
   db-network:
+    driver: bridge
+  redis-network:
     driver: bridge
