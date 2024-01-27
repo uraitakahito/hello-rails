@@ -51,5 +51,3 @@ test:
 production:
   <<: *default
   database: hello_rails_production
-  username: hello_rails
-  password: <%= ENV["HELLO_RAILS_DATABASE_PASSWORD"] %>
