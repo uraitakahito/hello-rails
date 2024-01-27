@@ -4,10 +4,12 @@
 
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+    <% cache(user, expires_in: 30.seconds) do %>
+      <%= render user %>
+      <p>
+        <%= link_to "Show this user", user %>
+      </p>
+    <% end %>
   <% end %>
 </div>
 
