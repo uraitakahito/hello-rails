@@ -27,5 +27,6 @@ end
 
 group :development do
   gem "rubocop-rails", require: false
+  gem "bullet"
 end
 
