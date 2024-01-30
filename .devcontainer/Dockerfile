@@ -1,7 +1,7 @@
 #
 # Be sure to use docker-compose or devcontainer.
 #
-FROM ruby:3.2-bullseye
+FROM ruby:3.2-bookworm
 
 ARG user_id=501
 ARG group_id=20
