@@ -16,6 +16,11 @@ services:
     networks:
       - db-network
       - redis-network
+    depends_on:
+      hello-rails-db:
+        condition: service_healthy
+      hello-rails-redis:
+        condition: service_healthy
 
   hello-rails-db:
     # mysql/mysql-server:5.7
@@ -34,6 +39,12 @@ services:
       - '3306:3306'
     networks:
       - db-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
+      interval: 30s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
 
   hello-rails-redis:
     image: redis:7.2.4
@@ -41,6 +52,12 @@ services:
       - '6379:6379'
     networks:
       - redis-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
 
 volumes:
   zsh-volume:
