@@ -12,6 +12,10 @@ AllCops:
     - "tmp/**/*"
     - "vendor/**/*"
 
+GlobalVars:
+  AllowedVariables:
+    - $redis
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
