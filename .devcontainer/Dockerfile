@@ -66,6 +66,17 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+#
+# Gem
+#
+RUN apt-get update -qq && \
+  apt-get upgrade -y -qq && \
+  apt-get install -y -qq \
+    # mysql2
+    default-libmysqlclient-dev && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
 COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 USER ${user_name}
