@@ -2,4 +2,5 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
+gem "rails", "6.1.7.6"
+gem "mysql2"
