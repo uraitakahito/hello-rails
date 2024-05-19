@@ -1,24 +1,15 @@
-# README
+## How to connect VS Code's debugger to an app or process that's already running
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```console
+% git clone git@github.com:uraitakahito/hello-rails.git
+% cd hello-rails
+% PROJECT=$(basename `pwd`)
+% echo $PROJECT
+hello-rails
+% docker image build -t $PROJECT-image ./.devcontainer --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+% docker container run --env-file ./.devcontainer/env -it --rm --init --mount type=bind,src=`pwd`,dst=/app --name $PROJECT-container $PROJECT-image /bin/zsh
+```
 
-Things you may want to cover:
+Select **[Dev Containers: Attach to Running Container](https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container)** through the **Command Palette (Shift + command + P)**
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open the `/app`.
