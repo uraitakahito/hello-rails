@@ -164,6 +164,11 @@ GEM
     rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rails (2.25.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (3.0.2)
       rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
@@ -207,6 +212,7 @@ DEPENDENCIES
   rails (~> 6.1.7, >= 6.1.7.6)
   rubocop
   rubocop-performance
+  rubocop-rails
   rubocop-rspec
   sass-rails (>= 6)
   tzinfo-data
