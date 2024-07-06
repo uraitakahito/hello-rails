@@ -66,9 +66,6 @@ COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 #
 # Add user.
 #
-#   Someone uses devcontainer, but the others don't.
-#   That is why dockerfile calls `features` MANUALLY here without devcontainer.json.
-#
 RUN cd /usr/src && \
   git clone --depth 1 https://github.com/uraitakahito/features.git && \
   USERNAME=${user_name} \
