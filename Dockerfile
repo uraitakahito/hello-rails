@@ -40,15 +40,29 @@ COPY docker-entrypoint.sh /usr/local/bin/
 #
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  # apt-get install -y -qq --no-install-recommends \
-  apt-get install -y -qq \
-    # rbenv
-    rbenv \
-    # Ruby 3.1
+  apt-get install -y -qq --no-install-recommends \
+    #
+    # https://github.com/rbenv/ruby-build/wiki
+    #
+    autoconf \
+    patch \
+    build-essential \
+    rustc \
+    libssl-dev \
     # require psych.h(libyaml-dev) to install debug gem
-    libyaml-dev && \
+    libyaml-dev \
+    libreadline6-dev \
+    zlib1g-dev \
+    libgmp-dev \
+    libncurses5-dev \
+    libffi-dev \
+    libgdbm6 \
+    libgdbm-dev \
+    libdb-dev \
+    uuid-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
+COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 #
 # Gem
@@ -60,8 +74,6 @@ RUN apt-get update -qq && \
     default-libmysqlclient-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-
-COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 #
 # Add user.
@@ -75,8 +87,8 @@ RUN cd /usr/src && \
     /usr/src/features/src/common-utils/install.sh
 USER ${user_name}
 
-WORKDIR /home/${user_name}
-
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+ENV PATH="/home/${user_name}/.rbenv/bin:${PATH}"
 RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
   rbenv install ${ruby_version} && \
   rbenv global ${ruby_version}
