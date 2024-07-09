@@ -4,6 +4,7 @@ FROM debian:bookworm-20240612
 ARG user_name=developer
 ARG user_id
 ARG group_id
+ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG ruby_version=3.1.4
 
 RUN apt-get update -qq && \
@@ -86,6 +87,13 @@ RUN cd /usr/src && \
   CONFIGUREZSHASDEFAULTSHELL=true \
     /usr/src/features/src/common-utils/install.sh
 USER ${user_name}
+
+#
+# dotfiles
+#
+RUN cd /home/${user_name} && \
+  git clone --depth 1 ${dotfiles_repository} && \
+  dotfiles/install.sh
 
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 ENV PATH="/home/${user_name}/.rbenv/bin:${PATH}"
