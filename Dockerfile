@@ -77,7 +77,7 @@ RUN apt-get update -qq && \
   rm -rf /var/lib/apt/lists/*
 
 #
-# Add user.
+# Add user and install basic tools.
 #
 RUN cd /usr/src && \
   git clone --depth 1 https://github.com/uraitakahito/features.git && \
@@ -95,6 +95,9 @@ RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
 
+#
+# rbenv
+#
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 ENV PATH="/home/${user_name}/.rbenv/bin:${PATH}"
 RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
@@ -102,5 +105,4 @@ RUN git clone --depth=1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/
   rbenv global ${ruby_version}
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-
 CMD ["tail", "-F", "/dev/null"]
