@@ -20,7 +20,7 @@
 #
 # Start the Docker container(/run/host-services/ssh-auth.sock is a virtual socket provided by Docker Desktop for Mac.):
 #
-#   docker container run -d --rm --init --mount type=bind,src=/run/host-services/ssh-auth.sock,dst=/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(gh auth token) --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --env-file ./env --name $PROJECT-container $PROJECT-image
+#   docker container run -d --rm --init --mount type=bind,src=/run/host-services/ssh-auth.sock,dst=/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(gh auth token) --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --env-file ./env -p 3000:3000 --name $PROJECT-container $PROJECT-image
 #
 # Log into the container.
 #
@@ -42,6 +42,7 @@
 # Run the following commands inside the Docker containers:
 #
 #   rbenv exec bundle install
+#   rbenv exec bundle exec rails server -b 0.0.0.0
 #
 
 # Debian 12.13
