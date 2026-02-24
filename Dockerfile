@@ -61,9 +61,11 @@ ENV LANG="$LANG"
 ARG TZ=UTC
 ENV TZ="$TZ"
 
+#
+# Git
+#
 RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq --no-install-recommends \
     ca-certificates \
     git && \
   apt-get clean && \
@@ -74,7 +76,7 @@ RUN apt-get update -qq && \
 #
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq --no-install-recommends \
     # Basic
     iputils-ping \
     # Editor
