@@ -44,6 +44,10 @@
 #   rbenv exec bundle install
 #   rbenv exec bundle exec rails server -b 0.0.0.0
 #
+# If you need to connect to MySQL, start MySQL on the host OS with the following command:
+#
+#   docker run --rm --name some-mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql:8.0.45
+#
 
 # Debian 12.13
 FROM debian:bookworm-20260202
