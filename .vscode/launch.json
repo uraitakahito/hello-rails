@@ -16,7 +16,9 @@
       },
       "script": "bin/rails",
       "args": [
-        "server"
+        "server",
+        "-b",
+        "0.0.0.0"
       ],
       // "askParameters": true,
       // "useBundler": true,
