@@ -51,6 +51,7 @@ ARG user_name=developer
 ARG user_id
 ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
+ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG ruby_version=3.1.4
 
 # Avoid warnings by switching to noninteractive for the build process
@@ -72,23 +73,24 @@ RUN apt-get update -qq && \
   rm -rf /var/lib/apt/lists/*
 
 #
-# Install packages
+# clone features
 #
-RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
-  apt-get install -y -qq --no-install-recommends \
-    # Basic
-    iputils-ping \
-    # Editor
-    vim emacs \
-    # Utility
-    tmux \
-    # fzf needs PAGER(less or something)
-    fzf \
-    exa \
-    trash-cli && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+RUN cd /usr/src && \
+  git clone --depth 1 ${features_repository}
+
+#
+# Add user and install common utils.
+#
+RUN USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+    CONFIGUREZSHASDEFAULTSHELL=true \
+    UPGRADEPACKAGES=false \
+    # When using ssh-agent inside Docker, add the user to the root group
+    # to ensure permission to access the mounted socket.
+    #   https://github.com/uraitakahito/features/blob/59e8acea74ff0accd5c2c6f98ede1191a9e3b2aa/src/common-utils/main.sh#L467-L471
+    ADDUSERTOROOTGROUP=true \
+      /usr/src/features/src/common-utils/install.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
@@ -132,16 +134,6 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-#
-# Add user and install basic tools.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 https://github.com/uraitakahito/features.git && \
-  USERNAME=${user_name} \
-  USERUID=${user_id} \
-  USERGID=${group_id} \
-  CONFIGUREZSHASDEFAULTSHELL=true \
-    /usr/src/features/src/common-utils/install.sh
 USER ${user_name}
 
 #
