@@ -1,6 +1,6 @@
 LANG
 
 MYSQL_USER="root"
-MYSQL_PASSWOWRD="password"
+MYSQL_PASSWORD="password"
 MYSQL_HOST="host.docker.internal"
 DATABASE="hello_rails_development"
