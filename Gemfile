@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.2.8"
+ruby "3.3.10"
 
 gem "rails", "7.2.3"
 gem "mysql2", "~> 0.5"

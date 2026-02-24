@@ -3,7 +3,7 @@ plugins:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 3.2.8
+  TargetRubyVersion: 3.3.10
   NewCops: enable
 
   Exclude:
