@@ -52,6 +52,7 @@ ARG user_id
 ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG features_repository="https://github.com/uraitakahito/features.git"
+ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
 ARG ruby_version=3.1.4
 
 # Avoid warnings by switching to noninteractive for the build process
@@ -91,6 +92,20 @@ RUN USERNAME=${user_name} \
     #   https://github.com/uraitakahito/features/blob/59e8acea74ff0accd5c2c6f98ede1191a9e3b2aa/src/common-utils/main.sh#L467-L471
     ADDUSERTOROOTGROUP=true \
       /usr/src/features/src/common-utils/install.sh
+
+#
+# Install extra utils.
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${extra_utils_repository} && \
+  ADDEZA=true \
+  ADDGRPCURL=true \
+  ADDHADOLINT=true \
+  ADDCLAUDECODE=true \
+  # Claude Code is installed under $HOME, so the username must be specified.
+  USERNAME=${user_name} \
+  UPGRADEPACKAGES=false \
+    /usr/src/extra-utils/utils/install.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
