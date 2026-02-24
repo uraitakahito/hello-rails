@@ -1,5 +1,3 @@
-LANG
-
 MYSQL_USER="root"
 MYSQL_PASSWORD="password"
 MYSQL_HOST="host.docker.internal"
