@@ -58,7 +58,7 @@ ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
-ARG ruby_version=3.1.4
+ARG ruby_version=3.2.8
 
 # Avoid warnings by switching to noninteractive for the build process
 ENV DEBIAN_FRONTEND=noninteractive
