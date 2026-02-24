@@ -53,6 +53,14 @@ ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG ruby_version=3.1.4
 
+# Avoid warnings by switching to noninteractive for the build process
+ENV DEBIAN_FRONTEND=noninteractive
+
+ARG LANG=C.UTF-8
+ENV LANG="$LANG"
+ARG TZ=UTC
+ENV TZ="$TZ"
+
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
