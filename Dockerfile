@@ -75,8 +75,8 @@ ENV TZ="$TZ"
 #
 RUN apt-get update -qq && \
   apt-get install -y -qq --no-install-recommends \
-    ca-certificates \
-    git && \
+    ca-certificates=20230311+deb12u1 \
+    git=1:2.39.5-0+deb12u3 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -125,22 +125,22 @@ RUN apt-get update -qq && \
     #
     # https://github.com/rbenv/ruby-build/wiki
     #
-    autoconf \
-    patch \
-    build-essential \
-    rustc \
-    libssl-dev \
+    autoconf=2.71-3 \
+    patch=2.7.6-7 \
+    build-essential=12.9 \
+    rustc=1.63.0+dfsg1-2 \
+    libssl-dev=3.0.18-1~deb12u2 \
     # require psych.h(libyaml-dev) to install debug gem
-    libyaml-dev \
-    libreadline6-dev \
-    zlib1g-dev \
-    libgmp-dev \
-    libncurses5-dev \
-    libffi-dev \
-    libgdbm6 \
-    libgdbm-dev \
-    libdb-dev \
-    uuid-dev && \
+    libyaml-dev=0.2.5-1 \
+    libreadline-dev=8.2-1.3 \
+    zlib1g-dev=1:1.2.13.dfsg-1 \
+    libgmp-dev=2:6.2.1+dfsg1-1.1 \
+    libncurses5-dev=6.4-4 \
+    libffi-dev=3.4.4-1 \
+    libgdbm6=1.23-3 \
+    libgdbm-dev=1.23-3 \
+    libdb-dev=5.3.2 \
+    uuid-dev=2.38.1-5+deb12u3 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -151,7 +151,7 @@ RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
   apt-get install -y -qq --no-install-recommends \
     # mysql2
-    default-libmysqlclient-dev && \
+    default-libmysqlclient-dev=1.1.0 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
