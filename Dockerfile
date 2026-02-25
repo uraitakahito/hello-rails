@@ -149,7 +149,7 @@ RUN apt-get update -qq && \
 #
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
-  apt-get install -y -qq \
+  apt-get install -y -qq --no-install-recommends \
     # mysql2
     default-libmysqlclient-dev && \
   apt-get clean && \
