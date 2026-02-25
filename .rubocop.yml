@@ -1,6 +1,7 @@
 plugins:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-rspec_rails
   - rubocop-performance
 
 AllCops:
@@ -9,6 +10,7 @@ AllCops:
 
   Exclude:
     - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
     # Rails auto-generated directories
     - 'bin/**/*'
     - 'config/**/*'

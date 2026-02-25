@@ -29,7 +29,13 @@ module HelloRails
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework :rspec,
+                        fixtures: false,
+                        view_specs: false,
+                        helper_specs: true,
+                        routing_specs: false
+      g.system_tests = nil
+    end
   end
 end
