@@ -1,0 +1,65 @@
+name: RSpec
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**/*.rb'
+      - '**/*.erb'
+      - '**/*.rake'
+      - 'Gemfile'
+      - 'Gemfile.lock'
+      - '.rspec'
+      - '.github/workflows/rspec.yml'
+  pull_request:
+    paths:
+      - '**/*.rb'
+      - '**/*.erb'
+      - '**/*.rake'
+      - 'Gemfile'
+      - 'Gemfile.lock'
+      - '.rspec'
+      - '.github/workflows/rspec.yml'
+
+jobs:
+  rspec:
+    name: Run RSpec
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: hello_rails_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      RAILS_ENV: test
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      DATABASE: hello_rails_test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Set up database
+        run: bundle exec rails db:create db:schema:load || bundle exec rails db:create
+
+      - name: Run RSpec
+        run: bundle exec rspec
