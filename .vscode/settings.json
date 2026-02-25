@@ -6,6 +6,9 @@
     "identifier": "rbenv"
   },
   "rubyLsp.formatter": "rubocop",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
+  },
   // https://shopify.github.io/ruby-lsp/RubyLsp/Requests.html
   "rubyLsp.enabledFeatures": {
     "codeActions": true,
