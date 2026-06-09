@@ -4,7 +4,7 @@ ruby "3.3.10"
 
 gem "rails", "7.2.3"
 gem "mysql2", "~> 0.5"
-gem "puma", "~> 6.0"
+gem "puma", "~> 7.2"
 gem "sprockets-rails"
 
 group :development, :test do
